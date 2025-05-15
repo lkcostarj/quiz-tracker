@@ -583,25 +583,6 @@
         }
 
     </script>
-
-<script>
-  function registrarClique(identificador) {
-    fetch('http://localhost:3000/registrar-clique', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: identificador, timestamp: Date.now() })
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('button').forEach(botao => {
-      botao.addEventListener('click', () => {
-        registrarClique(botao.innerText);
-      });
-    });
-  });
-</script>
-
 </body>
 </html>
 
