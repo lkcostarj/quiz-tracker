@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Admin</title>
+</head>
+<body>
+  <h1>Cliques registrados</h1>
+  <ul id="lista-cliques"></ul>
+
+  <script>
+    fetch('http://localhost:3000/obter-cliques')
+      .then(res => res.json())
+      .then(cliques => {
+        const lista = document.getElementById('lista-cliques');
+        cliques.forEach(c => {
+          const item = document.createElement('li');
+          item.textContent = `${new Date(c.timestamp).toLocaleString()} - ${c.id}`;
+          lista.appendChild(item);
+        });
+      });
+  </script>
+</body>
+</html>
