@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz: Deboísmo vs. Corre - Beck Embutido!</title>
     <style>
+        .main-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
         body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 10px;
+    overflow-x: hidden;
+    
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             margin: 0;
@@ -275,6 +290,7 @@
     </style>
 </head>
 <body>
+  <div class="main-wrapper">
     <div class="smoke-container" id="smoke-effect-container"></div>
     <div class="extra-smoke-container" id="extra-smoke-effect-container"></div> 
 
@@ -583,6 +599,6 @@
         }
 
     </script>
+  </div>
 </body>
 </html>
-
