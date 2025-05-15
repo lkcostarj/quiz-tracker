@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz: Deboísmo vs. Corre - Beck Embutido!</title>
+    <title>Quiz: Deboísmo vs. Corre - Beck Turbinado!</title>
     <style>
-        .main-wrapper {
-            width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
+        /* Global reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
         body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0 10px;
-    overflow-x: hidden;
-    
+            display: flex;
+            flex-direction: column; /* Ensure body itself can stack content if needed */
+            justify-content: flex-start; /* Align items to the start for scrolling */
+            align-items: center; /* Center .main-wrapper horizontally */
+            min-height: 100vh;
+            padding: 20px; 
+            overflow-x: hidden;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #4B0082; /* Roxo escuro para o fundo */
-            color: #E6E6FA; /* Lavanda claro para texto geral */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden; 
+            background-color: #4B0082; 
+            color: #E6E6FA; 
             position: relative; 
         }
 
+        .main-wrapper {
+            width: 100%;
+            max-width: 480px; /* Max width for the quiz content area */
+            margin-left: auto; /* Centering the wrapper */
+            margin-right: auto; /* Centering the wrapper */
+            display: flex; /* Using flex to center .container inside if needed */
+            flex-direction: column;
+            align-items: center; /* Center .container if it's narrower */
+        }
+        
         .smoke-container, .extra-smoke-container {
             position: fixed;
             top: 0;
@@ -51,12 +53,12 @@
             opacity: 0;
         }
         .smoke {
-            background-color: rgba(144, 238, 144, 0.25); /* Verde claro original - OPACIDADE AUMENTADA */
-            animation: smokeAnimation 12s infinite linear; /* Duração um pouco menor para mais movimento */
+            background-color: rgba(144, 238, 144, 0.25); 
+            animation: smokeAnimation 12s infinite linear; 
         }
         .smoke-particle-extra {
-            background-color: rgba(230, 230, 250, 0.2); /* Lavanda bem suave - OPACIDADE AUMENTADA */
-            animation: smokeAnimationExtra 18s infinite linear; /* Duração um pouco menor */
+            background-color: rgba(230, 230, 250, 0.2); 
+            animation: smokeAnimationExtra 18s infinite linear; 
         }
 
         @keyframes smokeAnimation {
@@ -65,10 +67,10 @@
                 transform: translateY(100vh) scale(0.6) translateX(0vw);
             }
             20% {
-                opacity: 0.45; /* OPACIDADE MÁXIMA AUMENTADA */
+                opacity: 0.45; 
             }
             80% {
-                opacity: 0.45; /* OPACIDADE MÁXIMA AUMENTADA */
+                opacity: 0.45; 
             }
             100% {
                 opacity: 0;
@@ -81,10 +83,10 @@
                 transform: translateY(100vh) scale(0.4) translateX(0vw);
             }
             25% {
-                opacity: 0.35; /* OPACIDADE MÁXIMA AUMENTADA */
+                opacity: 0.35; 
             }
             75% {
-                opacity: 0.35; /* OPACIDADE MÁXIMA AUMENTADA */
+                opacity: 0.35; 
             }
             100% {
                 opacity: 0;
@@ -93,9 +95,10 @@
         }
 
         .container {
-            max-width: 700px;
-            width: 90%;
-            margin: auto;
+            max-width: 100%; /* Allow container to take full width of main-wrapper */
+            width: 100%; /* Changed from 90% to ensure it uses the centered main-wrapper's width */
+            margin-top: 20px; 
+            margin-bottom: 20px;
             background: rgba(255, 255, 255, 0.1);
             padding: 25px;
             border-radius: 15px;
@@ -170,19 +173,32 @@
             color: #E6E6FA;
             cursor: pointer;
             text-align: left;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
             font-size: 0.95em; 
         }
         .options button:hover {
             background-color: rgba(144, 238, 144, 0.3);
             transform: scale(1.02);
+            border-color: #fff;
         }
+        .options button:active {
+            transform: scale(0.97) translateY(1px);
+            background-color: rgba(144, 238, 144, 0.4);
+        }
+        .option-selected-animation {
+            animation: pulseOption 0.4s ease-in-out;
+        }
+        @keyframes pulseOption {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); border-color: #90EE90; box-shadow: 0 0 10px #90EE90;}
+            100% { transform: scale(1); }
+        }
+
         .navigation, #start-button-container, .result-buttons-container {
             text-align: center; 
             margin-top: 20px;
         }
         
-        /* Animações para botões */
         @keyframes pulseButton {
             0% { transform: scale(1); box-shadow: 0 0 5px rgba(144, 238, 144, 0.3); }
             50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(144, 238, 144, 0.7); }
@@ -195,12 +211,12 @@
         }
 
         .navigation button, #start-button-container button, .cta-link, .restart-button {
-            padding: 14px 24px; /* Aumentado padding */
+            padding: 14px 24px; 
             color: white;
             border: none;
-            border-radius: 10px; /* Mais arredondado */
+            border-radius: 10px; 
             cursor: pointer;
-            font-size: 1.1em; /* Fonte um pouco maior */
+            font-size: 1.1em; 
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
             margin: 8px; 
             display: inline-block; 
@@ -212,8 +228,8 @@
         }
         #start-button-container button:hover, .restart-button:hover {
             background-color: #228B22; 
-            transform: scale(1.08); /* Hover mais pronunciado */
-            animation-play-state: paused; /* Pausa animação no hover para não competir */
+            transform: scale(1.08); 
+            animation-play-state: paused; 
         }
         .navigation button:disabled {
             background-color: #555;
@@ -228,7 +244,7 @@
         .cta-link {
             background-color: #8A2BE2; 
             text-decoration: none;
-            animation: pulseButtonCta 2.2s infinite ease-in-out; /* Animação um pouco diferente para CTA */
+            animation: pulseButtonCta 2.2s infinite ease-in-out; 
         }
         .cta-link:hover {
             background-color: #4B0082; 
@@ -287,6 +303,70 @@
             border: 2px solid #90EE90;
             display: none; 
         }
+
+        #dopamine-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #FFD700; 
+            color: #4B0082; 
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s ease-in-out, background-color 0.2s;
+        }
+        #dopamine-button:hover {
+            transform: scale(1.1);
+            background-color: #FFA500; 
+        }
+        #dopamine-button:active {
+            transform: scale(1.05);
+        }
+        .dopamine-particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: dopamineBurst 1s ease-out forwards;
+            z-index: 999;
+        }
+        @keyframes dopamineBurst {
+            0% {
+                opacity: 0.8;
+                transform: scale(0.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5) translate(var(--x-end), var(--y-end));
+            }
+        }
+
+        .social-proof-notification {
+            position: fixed;
+            bottom: 20px; /* Adjusted to be lower on the screen */
+            left: 50%;
+            transform: translateX(-50%) translateY(30px); /* Initial position for animation */
+            background-color: rgba(50, 205, 50, 0.9); /* Limão verde com maior opacidade */
+            color: #FFFFFF; 
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1001;
+            font-size: 0.85em;
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            max-width: 90%; /* Ensure it fits well on mobile */
+            text-align: center;
+        }
+        .social-proof-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -295,7 +375,6 @@
     <div class="extra-smoke-container" id="extra-smoke-effect-container"></div> 
 
     <div class="container">
-        <!-- A pergunta inicial será mantida como está no arquivo, já que o usuário informou que a alterou manualmente -->
         <h1>A maconha está<br>
         <span style="color: #8A2BE2;">te prejudicando</span> ou <span style="color: #32CD32;">te ajudando</span><br>
         na vida?</h1>
@@ -322,85 +401,71 @@
             <!-- O resultado será carregado aqui -->
         </div>
     </div>
+    <button id="dopamine-button" title="Clique para uma surpresa!">✨</button>
 
     <script>
         const jointStage0_base64 = "data:image/png;base64,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";
-        const jointStage1_base64 = "data:image/png;base64,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";
-        const jointStage2_base64 = "data:image/png;base64,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";
+
+        const jointImages = [jointStage0_base64, jointStage0_base64, jointStage0_base64]; 
+
+        const quizData = [
+            {
+                question: "Final de semana chegou com sol rachando! Qual o seu primeiro pensamento?",
+                image: "https://i.pinimg.com/736x/68/6d/99/686d991cfc8720752f1abe57a0b02302.jpg", 
+                options: [
+                    { text: "Chamar a galera pra um rolê, praia ou parque, o importante é não ficar em casa.", deboismo: 1, corre: 1 },
+                    { text: "Finalmente colocar aquela série em dia, com um balde de pipoca do lado.", deboismo: 2, corre: 0 },
+                    { text: "Adiantar aquele trampo extra ou projeto pessoal pra liberar a semana.", deboismo: 0, corre: 2 },
+                    { text: "Um pouco de tudo: curtir a manhã, resolver umas pendências à tarde e relaxar à noite.", deboismo: 1, corre: 1 }
+                ]
+            },
+            {
+                question: "Seu celular não para de apitar com notificações de trabalho fora do horário. Como você reage?",
+                image: "https://i.pinimg.com/736x/98/0f/3b/980f3bba84e0e68882b00d115fe7dda2.jpg", 
+                options: [
+                    { text: "Modo avião ativado! Meu tempo livre é sagrado e intocável.", deboismo: 2, corre: 0 },
+                    { text: "Dou uma espiada rápida só pra ver se o mundo tá acabando. Se não, ignoro.", deboismo: 1, corre: 1 },
+                    { text: "Já abro e respondo pra não acumular. Odeio deixar coisa pendente.", deboismo: 0, corre: 2 },
+                    { text: "Fico ansioso(a) só de ouvir o barulho, mesmo que decida não olhar na hora.", deboismo: 1, corre: 2 }
+                ]
+            },
+            {
+                question: "Você tem uma meta importante, mas a famosa preguiça bate forte. O que você faz?",
+                image: "https://i.pinimg.com/736x/4a/c8/f1/4ac8f1bb27d276667194823a6ae35d43.jpg", 
+                options: [
+                    { text: "Me rendo e digo: \"Hoje não, Faro\". Amanhã é outro dia, com mais disposição (eu espero).", deboismo: 2, corre: 0 },
+                    { text: "Uso a técnica dos 5 minutos: começo só por 5 minutinhos e vejo se engreno.", deboismo: 1, corre: 2 },
+                    { text: "Busco uma recompensa: \"Se eu fizer X, depois posso fazer Y que eu gosto\".", deboismo: 1, corre: 1 },
+                    { text: "Me forço na base do ódio mesmo. Disciplina acima de tudo, mesmo sem vontade.", deboismo: 0, corre: 2 }
+                ]
+            },
+            {
+                question: "Como você lida com imprevistos que bagunçam completamente seu planejamento perfeito?",
+                image: "https://i.pinimg.com/736x/bf/66/a5/bf66a59f33abcbda153e9007faef43e1.jpg", 
+                options: [
+                    { text: "Respiro fundo, solto um \"faz parte\" e tento adaptar o que dá. Sem estresse excessivo.", deboismo: 2, corre: 1 },
+                    { text: "Fico P da vida, reclamo um pouco, mas depois foco em apagar o incêndio e reorganizar.", deboismo: 1, corre: 2 },
+                    { text: "Aceito que o dia \"flopou\", cancelo os planos e deixo pra resolver no dia seguinte.", deboismo: 2, corre: 0 },
+                    { text: "Me irrito profundamente e isso afeta meu humor e produtividade pelo resto do dia.", deboismo: 0, corre: 1 }
+                ]
+            },
+            {
+                question: "Qual sua relação com listas de tarefas (as famosas to-do lists)?",
+                image: "https://i.pinimg.com/736x/30/17/aa/3017aa0e6c838696373a69aa2d4e68d8.jpg", 
+                options: [
+                    { text: "Melhores amigas! Adoro a sensação de riscar itens e ver o progresso.", deboismo: 0, corre: 2 },
+                    { text: "Faço de vez em quando, quando a coisa aperta, mas nem sempre sigo à risca.", deboismo: 1, corre: 1 },
+                    { text: "Acho um porre. Prefiro ir no flow, sem pressão de prazos e caixinhas pra marcar.", deboismo: 2, corre: 0 },
+                    { text: "Começo super empolgado(a) fazendo listas enormes, mas depois elas viram um lembrete da minha procrastinação.", deboismo: 1, corre: 0 }
+                ]
+            }
+        ];
 
         let currentQuestionIndex = 0;
-        let scores = {
-            deboismo: 0,
-            corre: 0
-        };
-        let quizData = []; 
-        const jointImages = []; 
-
-        function initializeQuizData() {
-            jointImages.length = 0; 
-            jointImages.push(jointStage0_base64, jointStage1_base64, jointStage2_base64);
-
-            quizData.length = 0; 
-            quizData.push(
-                {
-                    question: "Sextou! Qual o seu primeiro pensamento?",
-                    image: "https://i.pinimg.com/736x/ab/2d/16/ab2d1611147ce4a7e5fd1b3d40d45df3.jpg",
-                    options: [
-                        { text: "Chamar a galera pra larica e depois relaxar total.", deboismo: 2, corre: 0 },
-                        { text: "Ver se tem algum freela rápido pra fazer uma grana extra antes de curtir.", deboismo: 0, corre: 2 },
-                        { text: "Planejar o rolê, mas também já adiantar algo pro futuro.", deboismo: 1, corre: 1 }
-                    ]
-                },
-                {
-                    question: "Acordou na segunda meio lento. Como você encara o dia?",
-                    image: "https://i.pinimg.com/736x/4c/3e/03/4c3e037c912ab555e482e64c59b145cd.jpg",
-                    options: [
-                        { text: "Mais cinco minutinhos... talvez uma horinha. O dia é longo.", deboismo: 2, corre: 0 },
-                        { text: "Café reforçado e lista de tarefas na mão. Bora produzir!", deboismo: 0, corre: 2 },
-                        { text: "Começo devagar, pego no tranco e tento equilibrar as paradas.", deboismo: 1, corre: 1 }
-                    ]
-                },
-                {
-                    question: "Seu amigo te chama pra um rolê inesperado no meio da semana. E aí?",
-                    image: "https://i.pinimg.com/736x/d9/96/d2/d996d2554444cfff4a8e2757989acfc0.jpg",
-                    options: [
-                        { text: "Partiu! A vida é agora, as responsas esperam.", deboismo: 2, corre: 0 },
-                        { text: "Agradeço, mas explico que tô focado nos meus corres.", deboismo: 0, corre: 2 },
-                        { text: "Analiso se dá pra ir sem atrapalhar muito os planos. Se der, tô dentro!", deboismo: 1, corre: 1 }
-                    ]
-                },
-                {
-                    question: "Como você lida com a procrastinação quando ela bate forte?",
-                    image: "https://i.pinimg.com/736x/42/9a/dd/429add75b619f69ec85b1264957eaaa7.jpg",
-                    options: [
-                        { text: "Me entrego. Amanhã é outro dia, quem sabe a inspiração volta.", deboismo: 2, corre: 0 },
-                        { text: "Forço a barra, coloco uma música e tento fazer nem que seja um pouco.", deboismo: 0, corre: 2 },
-                        { text: "Dou uma pausa estratégica, espaireço e depois volto com mais foco.", deboismo: 1, corre: 1 }
-                    ]
-                },
-                {
-                    question: "Dinheiro extra apareceu! Qual a primeira coisa que você faz?",
-                    image: "https://i.pinimg.com/736x/5a/85/8d/5a858db12c20d88293f848441f36c1a7.jpg",
-                    options: [
-                        { text: "Larica gourmet! Ou aquele item que tô namorando faz tempo.", deboismo: 2, corre: 0 },
-                        { text: "Investir ou guardar pra um projeto futuro. Foco no objetivo!", deboismo: 0, corre: 2 },
-                        { text: "Um pouco pra curtir, um pouco pra responsa. Equilíbrio é tudo.", deboismo: 1, corre: 1 }
-                    ]
-                },
-                {
-                    question: "Qual sua relação com horários e prazos?",
-                    image: "https://i.pinimg.com/736x/18/03/d5/1803d554dae98dbb017097c3242b75cd.jpg",
-                    options: [
-                        { text: "Horário? Prazo? A gente se ajeita, o importante é não estressar.", deboismo: 2, corre: 0 },
-                        { text: "Super organizado! Gosto de tudo no tempo certo, sem correria de última hora.", deboismo: 0, corre: 2 },
-                        { text: "Tento ser pontual, mas às vezes a vida acontece. O importante é entregar.", deboismo: 1, corre: 1 }
-                    ]
-                }
-            );
-        }
+        let scores = { deboismo: 0, corre: 0 };
+        let socialProofIntervals = [];
 
         function startQuiz() {
-            initializeQuizData(); 
             currentQuestionIndex = 0;
             scores = { deboismo: 0, corre: 0 };
             document.getElementById("quiz-intro").style.display = "none";
@@ -410,6 +475,7 @@
             document.getElementById("quiz-area").innerHTML = ""; 
             document.getElementById("quiz-area").style.display = "block";
             document.getElementById("progress-container").style.display = "flex";
+            clearSocialProofNotifications();
             updateJointProgressImage(); 
             loadQuestion();
             createSmokeEffect(); 
@@ -442,7 +508,7 @@
                 questionData.options.forEach(option => {
                     const button = document.createElement("button");
                     button.textContent = option.text;
-                    button.onclick = () => selectOption(option.deboismo, option.corre);
+                    button.onclick = () => selectOption(option.deboismo, option.corre, button);
                     optionsDiv.appendChild(button);
                 });
                 questionContainer.appendChild(optionsDiv);
@@ -459,18 +525,64 @@
             }
         }
 
-        function selectOption(deboismo, corre) {
+        function selectOption(deboismo, corre, buttonElement) {
             scores.deboismo += deboismo;
             scores.corre += corre;
+
+            if (buttonElement) {
+                buttonElement.classList.add("option-selected-animation");
+                setTimeout(() => {
+                    buttonElement.classList.remove("option-selected-animation");
+                }, 400); 
+            }
+
             currentQuestionIndex++;
             
             const currentQuestionContainer = document.querySelector("#quiz-area .question-container");
             if (currentQuestionContainer) {
                 currentQuestionContainer.classList.remove("active");
+                if (currentQuestionIndex % 2 === 0 && currentQuestionIndex < quizData.length) { 
+                    displayIncentiveMessage();
+                }
                 setTimeout(loadQuestion, 500); 
             } else {
                 loadQuestion(); 
             }
+        }
+
+        function displayIncentiveMessage() {
+            const messages = ["Mandou bem na resposta!", "Show! Próxima...", "Continue assim, mestre!", "Interessante ponto de vista...", "Quase no final, guerreiro(a)!"];
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            const messageText = messages[randomIndex];
+
+            let incentiveBox = document.getElementById("incentive-message-box");
+            if (!incentiveBox) {
+                incentiveBox = document.createElement("div");
+                incentiveBox.id = "incentive-message-box";
+                incentiveBox.style.position = "fixed";
+                incentiveBox.style.bottom = "80px"; 
+                incentiveBox.style.left = "50%";
+                incentiveBox.style.transform = "translateX(-50%)";
+                incentiveBox.style.padding = "10px 20px";
+                incentiveBox.style.backgroundColor = "rgba(144, 238, 144, 0.85)";
+                incentiveBox.style.color = "#4B0082"; 
+                incentiveBox.style.borderRadius = "8px";
+                incentiveBox.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
+                incentiveBox.style.zIndex = "100";
+                incentiveBox.style.opacity = "0";
+                incentiveBox.style.transition = "opacity 0.5s ease-in-out, transform 0.5s ease-in-out";
+                incentiveBox.style.textAlign = "center";
+                document.body.appendChild(incentiveBox); 
+            }
+
+            incentiveBox.textContent = messageText;
+            incentiveBox.style.opacity = "1";
+            incentiveBox.style.transform = "translateX(-50%) translateY(0px)";
+
+            setTimeout(() => {
+                incentiveBox.style.opacity = "0";
+                incentiveBox.style.transform = "translateX(-50%) translateY(20px)";
+            }, 2500); 
         }
 
         function updateProgressBar() {
@@ -483,7 +595,7 @@
         function updateJointProgressImage() {
             const jointImage = document.getElementById("joint-progress-image");
             let stageIndex = 0;
-            if (quizData.length > 0) { 
+            if (quizData.length > 0 && jointImages.length > 0) { 
                  stageIndex = Math.min(jointImages.length - 1, Math.floor((currentQuestionIndex / quizData.length) * jointImages.length));
             }
             
@@ -504,25 +616,38 @@
 
             let resultTitleText = "";
             let resultTextContent = "";
-            let ctaLink = "#";
-            let ctaText = "Quero Saber Mais!";
+            let ctaLink = "https://pay.cakto.com.br/8i2rhah_377744"; 
+            let ctaText = "Quero Evoluir Minha Vibe!";
             let resultGif = "";
+            let practicalTips = [];
 
             if (scores.deboismo > scores.corre) {
                 resultTitleText = "Puro Deboísmo Tropical!";
                 resultTextContent = "Você leva a vida na maior tranquilidade, curtindo cada brisa e sem muita pressa. Relaxar é sua arte, mas cuidado pra não deixar os corres importantes de lado, beleza? Às vezes um empurrãozinho na produtividade pode abrir novas portas pra curtição também!";
-                ctaLink = "https://pay.cakto.com.br/8i2rhah_377744";
                 resultGif = "https://i.pinimg.com/736x/ac/dd/e6/acdde6ed8a0b72707a271537d0b6847c.jpg";
+                practicalTips = [
+                    "Dica 1: Canalize essa paz para uma atividade criativa que você realmente ama.",
+                    "Dica 2: Defina UMA pequena meta produtiva para hoje, só pra sentir o gostinho da realização.",
+                    "Dica 3: Lembre-se, o ócio é importante, mas o movimento gera novas brisas e oportunidades!"
+                ];
             } else if (scores.corre > scores.deboismo) {
                 resultTitleText = "No Corre Monstro!";
                 resultTextContent = "Você tá sempre na correria, focado nos seus objetivos e não perde tempo pra fazer acontecer. Essa garra é daora, mas não esquece de tirar um tempo pra dar aquela relaxada e curtir os frutos do seu esforço. O equilíbrio é a chave!";
-                ctaLink = "https://pay.cakto.com.br/8i2rhah_377744";
                 resultGif = "https://i.pinimg.com/736x/8a/90/ee/8a90ee687d9b52c0555ab8bfc6d1c448.jpg";
+                practicalTips = [
+                    "Dica 1: Agende pausas conscientes durante o dia. 5 minutinhos de ócio criativo já ajudam!",
+                    "Dica 2: Celebre suas conquistas, por menores que sejam. Você merece esse reconhecimento!",
+                    "Dica 3: Desconecte de verdade no seu tempo livre. Sua mente e corpo agradecem o descanso."
+                ];
             } else {
                 resultTitleText = "Equilíbrio é a Onda!";
                 resultTextContent = "Você sabe a hora de acelerar nos corres e a hora de dar aquela pausa pra curtir a brisa. Esse é o caminho! Manter esse equilíbrio entre responsa e lazer é o segredo pra uma vida produtiva e prazerosa. Continue nessa vibe!";
-                ctaLink = "https://pay.cakto.com.br/8i2rhah_377744";
                 resultGif = "https://i.pinimg.com/736x/44/e1/a3/44e1a3ab679fd9f519c936676aa61a1e.jpg";
+                practicalTips = [
+                    "Dica 1: Continue nutrindo tanto seus momentos de foco produtivo quanto os de relaxamento pleno.",
+                    "Dica 2: Experimente algo novo essa semana que te tire da rotina, seja produtivo ou puramente por lazer.",
+                    "Dica 3: Compartilhe sua sabedoria do equilíbrio com alguém que precise de um norte!"
+                ];
             }
 
             const resultTitle = document.createElement("h2");
@@ -543,6 +668,38 @@
             resultText.textContent = resultTextContent;
             resultArea.appendChild(resultText);
 
+            const tipsTitle = document.createElement("h3");
+            tipsTitle.textContent = "Dicas Práticas para sua Vibe:";
+            tipsTitle.style.color = "#90EE90";
+            tipsTitle.style.marginTop = "20px";
+            tipsTitle.style.fontSize = "1.3em";
+            resultArea.appendChild(tipsTitle);
+
+            const tipsList = document.createElement("ul");
+            tipsList.style.listStyleType = "\"🌿 \"";
+            tipsList.style.paddingLeft = "20px";
+            tipsList.style.textAlign = "left";
+            tipsList.style.margin = "10px auto";
+            tipsList.style.maxWidth = "80%";
+
+            practicalTips.forEach(tip => {
+                const listItem = document.createElement("li");
+                listItem.textContent = tip;
+                listItem.style.marginBottom = "8px";
+                listItem.style.color = "#E6E6FA";
+                tipsList.appendChild(listItem);
+            });
+            resultArea.appendChild(tipsList);
+
+            const checkoutPrepText = document.createElement("p");
+            checkoutPrepText.className = "result-text"; 
+            checkoutPrepText.style.marginTop = "25px";
+            checkoutPrepText.style.marginBottom = "15px";
+            checkoutPrepText.style.fontStyle = "italic";
+            checkoutPrepText.style.fontSize = "0.95em";
+            checkoutPrepText.innerHTML = "<strong>Uma palavrinha antes de você seguir:</strong><br>Curtiu a jornada de autoconhecimento? Este quiz foi feito com carinho e pesquisa pra te ajudar a sacar sua vibe. Acreditamos que ferramentas de qualidade, que realmente agregam valor, têm seu corre por trás. Diferente de muita coisa \"grátis\" por aí que não entrega o que promete, aqui a gente investe em conteúdo que transforma. Ao avançar, você não tá só pegando um produto, mas apoiando a criação de mais experiências como esta. Bora continuar essa evolução? ✨";
+            resultArea.appendChild(checkoutPrepText);
+
             const buttonsContainer = document.createElement("div"); 
             buttonsContainer.className = "result-buttons-container"; 
 
@@ -561,9 +718,69 @@
             
             resultArea.appendChild(buttonsContainer); 
 
+            const extraInteractionsTitle = document.createElement("h3");
+            extraInteractionsTitle.textContent = "Explore Mais (Em Breve!)";
+            extraInteractionsTitle.style.color = "#90EE90";
+            extraInteractionsTitle.style.marginTop = "30px";
+            extraInteractionsTitle.style.fontSize = "1.3em";
+            resultArea.appendChild(extraInteractionsTitle);
+
+            const extraInteractionsText = document.createElement("p");
+            extraInteractionsText.className = "result-text";
+            extraInteractionsText.style.fontSize = "0.95em";
+            extraInteractionsText.innerHTML = "Gostou da brisa? Estamos preparando mais interações iradas, como um mini-jogo <strong>\"Equilibrista Zen\"</strong> pra você testar suas habilidades de balancear o corre e o deboísmo, e uma <strong>\"Roda da Brisa Diária\"</strong> com sugestões personalizadas pro seu dia. Fica de olho!";
+            resultArea.appendChild(extraInteractionsText);
+
             requestAnimationFrame(() => {
                  resultArea.classList.add("active");
+                 triggerSocialProofNotifications(); 
             });
+        }
+
+        function triggerSocialProofNotifications() {
+            clearSocialProofNotifications(); 
+            const notificationMessages = [
+                "João P. de SP acabou de firmar o compromisso!",
+                "Maria C. do RJ também firmou o compromisso!",
+                "Um usuário de MG acaba de firmar o compromisso!",
+                "Ana S. de BA também está nessa!",
+                "Mais um usuário de SC firmou o compromisso agora!"
+            ];
+            let delay = 2500; 
+            const numNotifications = 3 + Math.floor(Math.random() * 2); 
+
+            for (let i = 0; i < numNotifications; i++) {
+                const timeoutId = setTimeout(() => {
+                    const randomIndex = Math.floor(Math.random() * notificationMessages.length);
+                    displaySocialProof(notificationMessages[randomIndex]);
+                }, delay);
+                socialProofIntervals.push(timeoutId);
+                delay += (Math.random() * 3000 + 5000); 
+            }
+        }
+
+        function displaySocialProof(message) {
+            const notification = document.createElement("div");
+            notification.className = "social-proof-notification";
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            requestAnimationFrame(() => {
+                notification.classList.add("show");
+            });
+
+            const removeTimeoutId = setTimeout(() => {
+                notification.classList.remove("show");
+                setTimeout(() => notification.remove(), 600); 
+            }, 4500); 
+            socialProofIntervals.push(removeTimeoutId);
+        }
+
+        function clearSocialProofNotifications() {
+            socialProofIntervals.forEach(id => clearTimeout(id));
+            socialProofIntervals = [];
+            const existingNotifications = document.querySelectorAll(".social-proof-notification");
+            existingNotifications.forEach(notif => notif.remove());
         }
 
         function createSmokeEffect() {
@@ -572,7 +789,7 @@
             
             if (smokeContainer) {
                 smokeContainer.innerHTML = ""; 
-                for (let i = 0; i < 20; i++) { // AUMENTADO NÚMERO DE PARTÍCULAS
+                for (let i = 0; i < 20; i++) { 
                     const smokeParticle = document.createElement("div");
                     smokeParticle.className = "smoke";
                     smokeParticle.style.left = Math.random() * 100 + "vw";
@@ -585,7 +802,7 @@
             }
             if (extraSmokeContainer) {
                 extraSmokeContainer.innerHTML = "";
-                 for (let i = 0; i < 15; i++) { // AUMENTADO NÚMERO DE PARTÍCULAS
+                 for (let i = 0; i < 15; i++) { 
                     const smokeParticle = document.createElement("div");
                     smokeParticle.className = "smoke-particle-extra";
                     smokeParticle.style.left = Math.random() * 100 + "vw";
@@ -598,6 +815,31 @@
             }
         }
 
+        document.addEventListener("DOMContentLoaded", () => {
+            createSmokeEffect(); 
+            const dopamineButton = document.getElementById("dopamine-button");
+            if (dopamineButton) {
+                dopamineButton.onclick = () => {
+                    for (let i = 0; i < 15; i++) { 
+                        const particle = document.createElement("div");
+                        particle.className = "dopamine-particle";
+                        const colors = ["#FFD700", "#FF69B4", "#00FFFF", "#7FFF00", "#FF4500", "#90EE90"];
+                        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        const size = Math.random() * 15 + 5; 
+                        particle.style.width = size + "px";
+                        particle.style.height = size + "px";
+                        particle.style.left = (dopamineButton.getBoundingClientRect().left + dopamineButton.offsetWidth / 2) + "px";
+                        particle.style.top = (dopamineButton.getBoundingClientRect().top + dopamineButton.offsetHeight / 2) + "px";
+                        particle.style.setProperty("--x-end", (Math.random() * 200 - 100) + "px"); 
+                        particle.style.setProperty("--y-end", (Math.random() * 200 - 100) + "px"); 
+                        document.body.appendChild(particle);
+                        setTimeout(() => {
+                            particle.remove();
+                        }, 1000); 
+                    }
+                };
+            }
+        });
     </script>
   </div>
 </body>
