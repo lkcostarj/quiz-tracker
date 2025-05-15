@@ -16,6 +16,7 @@
       align-items: center;
       min-height: 100vh;
     }
+
     .container {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255,255,255,0.2);
@@ -26,15 +27,18 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
+
     h1 {
       text-align: center;
       color: #90EE90;
       margin-bottom: 20px;
     }
+
     ul {
       list-style: none;
       padding: 0;
     }
+
     li {
       background: rgba(255, 255, 255, 0.05);
       margin-bottom: 10px;
@@ -51,7 +55,7 @@
   </div>
 
   <script>
-    fetch('http://localhost:3000/obter-cliques')
+    fetch('https://quiz-backend-production-a8c0.up.railway.app/obter-cliques')
       .then(res => res.json())
       .then(dados => {
         const lista = document.getElementById('lista-cliques');
